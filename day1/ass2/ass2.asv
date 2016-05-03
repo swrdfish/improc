@@ -1,0 +1,17 @@
+file = 'D:\binayak\images dat files\newimg.dat';
+mat = importdata(file);
+[x, y] = size(mat);
+
+up = zeros(x/2, y/2);
+size(downsample);
+
+for i = 1:2:x
+    for j = 1:2:y
+%         disp(i);
+%         disp(j);
+        downsample(ceil(i/2), ceil(j/2)) = mat(i, j);
+    end
+end
+
+image = mat2gray(downsample, [0, 255]);
+imwrite(image);

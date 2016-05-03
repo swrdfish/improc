@@ -1,0 +1,66 @@
+clc;
+clear all;
+
+image = importdata('l256.dat');
+
+histo = zeros(1, 256);
+histoout = zeros(1, 256);
+
+% calculate the histogram
+[x, y] = size(image);
+for i = 1:x
+    for j = 1:y
+        histo(image(i,j) + 1) = histo(image(i,j) + 1) + 1;
+    end
+end
+
+% calculate the normalized histogram
+total_px = x*y;
+normhisto = histo/total_px;
+
+% create the output histogram
+for i = 1:256
+    if(i<128)
+        histoout(i) = i;
+    else
+        histoout(i) = 256-i;
+    end
+end
+
+% calculate the normalized histogram
+normhistout = histoout/sum(histoout);
+
+% calculate the cdf for input and output histogram
+cdf = zeros(1, 256);
+cdf(1) = histo(1);
+for i = 2:256
+   cdf(i) = cdf(i-1) + histo(i);
+end
+
+cdfout = zeros(1, 256);
+cdfout(1) = histoout(1);
+for i = 2:256
+    cdfout(i) = cdfout(i-1) + histoout(i);
+end
+
+% do the mapping from input to target
+newimage = zeros(size(image));
+for i = 1:x
+    for j = 1:y
+        s = cdf(image(i, j));
+        % find the corresponding z
+        for k = 1:256
+            if(cdfout(k) - s < s)
+                newimage(i,j) = k;
+            end
+        end
+    end
+end
+
+
+figure(1), plot(normhistout);
+figure(2), plot(normhisto);
+figure(3), plot(cdf);
+figure(4), plot(cdfout);
+image = mat2gray(newimage);
+figure(5), imshow(image);

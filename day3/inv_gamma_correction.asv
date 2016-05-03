@@ -1,0 +1,21 @@
+clc;
+clear all;
+
+gamma = input('Specify gamma value: ');
+constant = input('Specify  constant value: ');
+
+% image = importdata('l256.dat');
+image = imread('gamma.jpg');
+[x, y] = size(image);
+temp = zeros(x,y);
+
+
+for i=1:x
+   for j=1:y
+      temp(i,j) = (1/constant) * (image(i, j)^(1/gamma));
+   end
+end
+
+temp = mat2gray(temp, [0, 1]);
+imshow(temp);
+imwrite(temp, 'gammainv.jpg');

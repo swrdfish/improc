@@ -1,0 +1,4 @@
+1) Write a program to show the minimum and maximum pixel values of a 8 bit/pixel grayscale image.
+   Also write a program to convert grayscale image to a binary image using threshold opereation    where threshold = (minimum value + maximum value)/2. Show the difference considering threshold =    128
+
+2) Write a program to implement down sampling/up sampling of an image by a factor of 2. Repeat the operation twice/thrice (2/3times). Show the result of up sampling by (i) Duplication of row-column (ii) by simple averaging interpolation.

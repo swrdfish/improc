@@ -1,0 +1,16 @@
+clc;
+clear all;
+
+const = input('Enter the constant value: ');
+
+image = importdata('l256.dat');
+
+histo = zeros(1, 256);
+normhisto = zeros(1, 256);
+
+
+
+temp = const * log(image +1);
+
+imshow(temp);
+imwrite(temp, 'log.jpg');

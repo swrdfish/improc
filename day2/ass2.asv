@@ -1,0 +1,25 @@
+image = importdata('l256.dat');
+
+[x, y] = size(image);
+
+bitplane = zeros(x,y,8);
+
+neg = zeros(x,y);
+
+for i = 1:x
+    for j = 1:y
+        bin = dec2bin(image(i, j));
+        for k = 1:8
+            bitplane(i,j,k) = bin[k];
+        end
+        nbin = bitcmp(bin);
+        neg(i, j) = bin2dec(nbin); 
+    end
+end
+
+image = mat2gray(image);
+neg = mat2gray(neg);
+
+figure('name','Original'), imshow(image);
+figure('name','Negative'), imshow(neg);
+

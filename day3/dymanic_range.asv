@@ -1,0 +1,17 @@
+clc;
+clear all;
+
+constant = input('Specify  constant value: ');
+
+image = importdata('l256.dat');
+image = mat2gray(image);
+
+for gamma = 1:-0.1:0
+   temp = constant * (image.^gamma);
+   figure, imshow(temp), title(gamma);
+end
+
+temp = 0.1 * (image.^0.1);
+
+figure, imshow(temp), title(gamma);
+imwrite(temp, low_contrast'
